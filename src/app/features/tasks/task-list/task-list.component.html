@@ -1,0 +1,114 @@
+<header class="page-header">
+  <div>
+    <h1>Tasks</h1>
+    <p class="subtitle">Manage your work with search, filters, and status tracking.</p>
+  </div>
+  <a class="btn primary" routerLink="/tasks/new">Create task</a>
+</header>
+
+<app-feedback-banner />
+<app-dashboard-stats />
+
+<section class="filters" aria-label="Task filters">
+  <div class="field">
+    <label for="search">Search by title</label>
+    <input
+      id="search"
+      type="search"
+      [ngModel]="state.filters().search"
+      (ngModelChange)="onSearchChange($event)"
+      placeholder="Search tasks…"
+    />
+  </div>
+  <div class="field">
+    <label for="status-filter">Status</label>
+    <select
+      id="status-filter"
+      [ngModel]="state.filters().status"
+      (ngModelChange)="onStatusChange($event)"
+    >
+      @for (option of statusOptions; track option) {
+        <option [value]="option">{{ option === 'all' ? 'All statuses' : labelStatus(option) }}</option>
+      }
+    </select>
+  </div>
+  <div class="field">
+    <label for="priority-filter">Priority</label>
+    <select
+      id="priority-filter"
+      [ngModel]="state.filters().priority"
+      (ngModelChange)="onPriorityChange($event)"
+    >
+      @for (option of priorityOptions; track option) {
+        <option [value]="option">
+          {{ option === 'all' ? 'All priorities' : labelPriority(option) }}
+        </option>
+      }
+    </select>
+  </div>
+</section>
+
+@if (state.tasksLoaded()) {
+  @if (state.filteredTasks().length === 0) {
+    <div class="empty-state" role="status">
+      <h2>No tasks found</h2>
+      <p>Try adjusting your filters or create a new task to get started.</p>
+      <a routerLink="/tasks/new" class="btn primary">Create your first task</a>
+    </div>
+  } @else {
+    <div class="table-wrap">
+      <table class="task-table">
+        <caption class="sr-only">Task list</caption>
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Status</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Due date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (task of state.filteredTasks(); track task.id) {
+            <tr [class.overdue-row]="isOverdue(task)">
+              <td>
+                <div class="title-cell">
+                  <strong>{{ task.title }}</strong>
+                  @if (task.description) {
+                    <span class="description">{{ task.description }}</span>
+                  }
+                  @if (isOverdue(task)) {
+                    <span class="overdue-badge">Overdue</span>
+                  }
+                </div>
+              </td>
+              <td>
+                <span class="badge status" [attr.data-status]="task.status">
+                  {{ labelStatus(task.status) }}
+                </span>
+              </td>
+              <td>
+                <span class="badge priority" [attr.data-priority]="task.priority">
+                  {{ labelPriority(task.priority) }}
+                </span>
+              </td>
+              <td>{{ task.dueDate | date: 'mediumDate' }}</td>
+              <td class="actions">
+                <a [routerLink]="['/tasks', task.id, 'edit']" class="btn link">Edit</a>
+                <button type="button" class="btn danger" (click)="requestDelete(task)">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+}
+
+@if (pendingDelete(); as task) {
+  <app-delete-confirm-dialog
+    [taskTitle]="task.title"
+    (confirm)="confirmDelete()"
+    (cancel)="cancelDelete()"
+  />
+}

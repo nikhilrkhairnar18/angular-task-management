@@ -1,0 +1,17 @@
+<div class="layout">
+  <aside class="sidebar" aria-label="Main navigation">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">✓</span>
+      <span class="brand-text">Task Manager</span>
+    </div>
+    <nav class="nav">
+      <a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Dashboard & Tasks
+      </a>
+      <a routerLink="/tasks/new" routerLinkActive="active">New Task</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

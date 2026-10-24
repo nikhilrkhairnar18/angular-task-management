@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="field">
+    <label for="title">Title <span aria-hidden="true">*</span></label>
+    <input id="title" type="text" formControlName="title" autocomplete="off" />
+    @if (showError('title')) {
+      @if (form.controls.title.hasError('required')) {
+        <p class="error" role="alert">Title is required.</p>
+      } @else if (form.controls.title.hasError('minlength')) {
+        <p class="error" role="alert">Title must be at least 3 characters.</p>
+      }
+    }
+  </div>
+
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea id="description" rows="3" formControlName="description"></textarea>
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <label for="status">Status <span aria-hidden="true">*</span></label>
+      <select id="status" formControlName="status">
+        @for (status of statusOptions; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+      @if (showError('status')) {
+        <p class="error" role="alert">Status is required.</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="priority">Priority <span aria-hidden="true">*</span></label>
+      <select id="priority" formControlName="priority">
+        @for (priority of priorityOptions; track priority) {
+          <option [value]="priority">{{ priority }}</option>
+        }
+      </select>
+      @if (showError('priority')) {
+        <p class="error" role="alert">Priority is required.</p>
+      }
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="dueDate">Due date <span aria-hidden="true">*</span></label>
+    <input id="dueDate" type="date" formControlName="dueDate" />
+    @if (showError('dueDate')) {
+      <p class="error" role="alert">Due date is required.</p>
+    }
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn primary">{{ submitLabel() }}</button>
+  </div>
+</form>

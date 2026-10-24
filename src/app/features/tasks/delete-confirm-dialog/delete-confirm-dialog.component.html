@@ -1,0 +1,18 @@
+<div class="backdrop" role="presentation" (click)="cancel.emit()"></div>
+<div
+  class="dialog"
+  role="alertdialog"
+  aria-modal="true"
+  aria-labelledby="delete-title"
+  aria-describedby="delete-desc"
+>
+  <h2 id="delete-title">Delete task?</h2>
+  <p id="delete-desc">
+    Are you sure you want to delete <strong>{{ taskTitle() }}</strong>? This action cannot be
+    undone.
+  </p>
+  <div class="actions">
+    <button type="button" class="btn secondary" (click)="cancel.emit()">Cancel</button>
+    <button type="button" class="btn danger" (click)="confirm.emit()">Delete</button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<header class="page-header">
+  <div>
+    <a routerLink="/tasks" class="back-link">← Back to tasks</a>
+    <h1>{{ pageTitle() }}</h1>
+  </div>
+</header>
+
+<app-feedback-banner />
+
+@if (state.tasksLoaded()) {
+  @if (isEditMode() && !task()) {
+    <div class="notice" role="alert">
+      Task not found. It may have been deleted or the ID is invalid.
+    </div>
+  } @else {
+    <app-task-form
+      [task]="task() ?? null"
+      [submitLabel]="isEditMode() ? 'Update task' : 'Create task'"
+      (submitted)="onSubmit($event)"
+    />
+  }
+}

@@ -1,0 +1,23 @@
+.page-header {
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.notice {
+  padding: 0.85rem 1rem;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 0.5rem;
+}

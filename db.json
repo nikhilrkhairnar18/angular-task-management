@@ -1,0 +1,43 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Review Angular assessment requirements",
+      "description": "Read through all mandatory features and testing expectations.",
+      "status": "completed",
+      "priority": "high",
+      "dueDate": "2026-10-20"
+    },
+    {
+      "id": "2",
+      "title": "Implement task list and filters",
+      "description": "Search, status/priority filters, and overdue highlighting.",
+      "status": "in-progress",
+      "priority": "high",
+      "dueDate": "2026-10-25"
+    },
+    {
+      "id": "3",
+      "title": "Write unit tests",
+      "description": "Cover service, component, form validation, and API errors.",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2026-10-28"
+    },
+    {
+      "id": "4",
+      "title": "Update project README",
+      "status": "todo",
+      "priority": "low",
+      "dueDate": "2026-11-01"
+    },
+    {
+      "id": "5",
+      "title": "Overdue sample task",
+      "description": "Used to verify overdue styling in the UI.",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2026-10-01"
+    }
+  ]
+}

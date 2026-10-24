@@ -1,0 +1,20 @@
+@if (state.loading()) {
+  <p class="banner loading" role="status" aria-live="polite">Loading tasks…</p>
+}
+
+@if (state.error(); as errorMessage) {
+  <div class="banner error" role="alert">
+    <span>{{ errorMessage }}</span>
+    @if (!state.tasksLoaded()) {
+      <button type="button" (click)="retryLoad()">Retry</button>
+    }
+    <button type="button" (click)="dismissError()" aria-label="Dismiss error">×</button>
+  </div>
+}
+
+@if (state.successMessage(); as success) {
+  <div class="banner success" role="status" aria-live="polite">
+    <span>{{ success }}</span>
+    <button type="button" (click)="dismissSuccess()" aria-label="Dismiss message">×</button>
+  </div>
+}
