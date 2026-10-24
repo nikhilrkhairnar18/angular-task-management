@@ -114,4 +114,4 @@ The task list and form wait for the initial load to complete, preventing empty-s
 
 ## AI coding assistance declaration
 
-This project was implemented with **AI coding assistance** (Cursor / Claude) for scaffolding, styling, tests, and documentation. All code was reviewed and adjusted to meet the assessment requirements; tests and builds were run locally to verify behavior.
+This project was implemented with **AI coding assistance** (Cursor, Claude, and GitHub Copilot) for scaffolding, styling, tests, and documentation. All code was reviewed and adjusted to meet the assessment requirements; tests and builds were run locally to verify behavior.
